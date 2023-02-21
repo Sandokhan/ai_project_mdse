@@ -5,7 +5,7 @@ from random import randint
 
 # Set up screen dimensions
 screen_width = 900
-screen_heigth = 600
+screen_height = 600
 
 # Set up board dimensions and locations
 board_x = 40
@@ -14,13 +14,13 @@ board_y = 120
 # Set up seed dimensions
 seed_size = 10
 
-#add_seed = pygame.mixer.Sound('sound/add_seed.wav')
-#add_seed.play(-1)
+# add_seed = pygame.mixer.Sound('sound/add_seed.wav')
+# add_seed.play(-1)
 
 # Set up Pygame
 pygame.init()
 font = pygame.font.SysFont('arial', 40, bold=True, italic=True)
-screen = pygame.display.set_mode((screen_width, screen_heigth ))
+screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Mancala')
 
 # Set up the background
@@ -33,8 +33,8 @@ board_mancala = pygame.image.load("image/board.png").convert_alpha()
 image_width, image_height = board_mancala.get_size()
 
 # set the new size of the image 
-new_width = int(image_width * 0.65) # largura do tabuleiro
-new_height = int(image_height * 0.65) # altura do tabuleiro
+new_width = int(image_width * 0.65)  # largura do tabuleiro
+new_height = int(image_height * 0.65)  # altura do tabuleiro
 
 # resize the image
 board_image = pygame.transform.scale(board_mancala, (new_width, new_height))
@@ -85,4 +85,3 @@ while True:
 
     # Update the display
     pygame.display.flip()
-
