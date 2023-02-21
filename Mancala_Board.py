@@ -24,24 +24,24 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Mancala')
 
 # Set up the background
-background_image = pygame.image.load("image/background.png").convert()
+background_image = pygame.image.load("images/background.png").convert()
 
-# Set up the board image
-board_mancala = pygame.image.load("image/board.png").convert_alpha()
+# Set up the board images
+board_mancala = pygame.image.load("images/board.png").convert_alpha()
 
-# get the image dimensions
+# get the images dimensions
 image_width, image_height = board_mancala.get_size()
 
-# set the new size of the image 
+# set the new size of the images
 new_width = int(image_width * 0.65)  # largura do tabuleiro
 new_height = int(image_height * 0.65)  # altura do tabuleiro
 
-# resize the image
+# resize the images
 board_image = pygame.transform.scale(board_mancala, (new_width, new_height))
 
 
-# Set up the seed image
-seed_image = pygame.image.load("image/seed.png").convert_alpha()
+# Set up the seed images
+seed_image = pygame.image.load("images/seed.png").convert_alpha()
 
 # Set up the board
 board = [
