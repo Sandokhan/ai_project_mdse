@@ -11,9 +11,10 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+
 class Mancala:
     def __init__(self, player1_avatar, player2_avatar, difficulty, game_mode):
-        self.board = [[4]*6, [4]*6]
+        self.board = [[4] * 6, [4] * 6]
         self.stores = [0, 0]
         self.current_player = 0
         self.player1_avatar = player1_avatar
@@ -191,5 +192,3 @@ class Mancala:
             return 1
         else:
             return -1
-
-    
