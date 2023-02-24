@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import button
+# import mancala_board
 
 pygame.init()
 
@@ -31,6 +32,7 @@ exit_button = button.Button(500, 200, exit_img, 0.8)
 def draw_text(text, font, text_coulor, x, y):
     img = font.render(text, True, text_coulor)
     screen.blit(img, (x, y))
+
 
 # game loop
 run = True
