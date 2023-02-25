@@ -2,5 +2,5 @@
 __pycache__/
 images/.DS_Store/
 mancala_board.py
-mancala_board2.py
+sandbox/mancala_board2.py
 menu2.py

@@ -1,7 +1,5 @@
 import pygame
 from pygame.locals import *
-from sys import exit
-from random import randint
 
 # Set up screen dimensions
 screen_width = 900
@@ -62,7 +60,7 @@ clock = pygame.time.Clock()
 x, y = (0,0)
 while True:
     clock.tick(30)
-    
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
