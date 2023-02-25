@@ -42,7 +42,7 @@ class Mancala:
         return False
 
     def game_over(self):
-        return all(x == 0 for x in self.board[0]) or all(x == 0 for x in self.board[1])
+        return all(x == 0 for x in self.board[0]) | all(x == 0 for x in self.board[1])
 
     def determine_winner(self):
         if self.stores[0] > self.stores[1]:
