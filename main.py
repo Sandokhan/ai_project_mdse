@@ -1,4 +1,12 @@
+import random
+
 binAmount = [0 if i in (6, 13) else 4 for i in range(14)]
+
+
+def choose_pit():
+    valid_pits = [i for i in ('a', 'b', 'c', 'd', 'e', 'f')]
+    return random.choice(valid_pits)
+
 
 playing = True
 playerOne = True
@@ -42,9 +50,10 @@ while playing:
     if playerOne:
         print("        f   e    d    c    b    a")
     print("")
-
-    userInput = input("Choose a bin or enter 'q' to QUIT the game: ")
-
+    if playerOne:
+        userInput = input("Choose a bin or enter 'q' to QUIT the game: ")
+    if not playerOne:
+        userInput = choose_pit()
     if userInput == 'q':
         playing = False
         chooseBin = 0
@@ -123,7 +132,7 @@ while playing:
     sideTwo = 0
     for j in range(6):
         sideOne = int(sideOne) + int(binAmount[j])
-        sideTwo = int(sideTwo) + int(binAmount[j+7])
+        sideTwo = int(sideTwo) + int(binAmount[j + 7])
 
     if int(sideOne) == 0 or int(sideTwo) == 0:
         playing = False
@@ -131,7 +140,7 @@ while playing:
         binAmount[13] = int(binAmount[13]) + int(sideTwo)
         for k in range(6):
             binAmount[k] = 0
-            binAmount[k+7] = 0
+            binAmount[k + 7] = 0
 # end while loop
 print("")
 print("The Game is Over!")
