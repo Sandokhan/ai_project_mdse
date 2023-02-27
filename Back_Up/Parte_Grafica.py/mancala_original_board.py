@@ -1,5 +1,7 @@
 import pygame
 from pygame.locals import *
+from sys import exit
+from random import randint
 
 # Set up screen dimensions
 screen_width = 900
@@ -40,8 +42,6 @@ board_image = pygame.transform.scale(board_mancala, (new_width, new_height))
 
 # Set up the seed images
 seed_image = pygame.image.load("images/seed.png").convert_alpha()
-seed_width = seed_image.get_width()
-seed_height = seed_image.get_height()
 
 # Set up the board
 board = [
@@ -57,17 +57,14 @@ board = [
 player_turn = 1
 
 clock = pygame.time.Clock()
-x, y = (0,0)
+
 while True:
     clock.tick(30)
-
+    
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
-        elif event.type == pygame.MOUSEMOTION:
-            x, y = event.pos
-            x -= seed_width/2
-            y -= seed_height/2
+            exit()
 
     # Draw the background
     screen.blit(background_image, (0, 0))
@@ -85,9 +82,8 @@ while True:
                 for k in range(seed_count):
                     screen.blit(seed_image, (x, y))
                     y += seed_size
-    #
-    # screen.blit(seed_image, (x, y))
-    # # Update the display
-    # #pygame.display.flip()
-    pygame.display.update()
-pygame.quit()
+
+    # Update the display
+    pygame.display.flip()
+
+    

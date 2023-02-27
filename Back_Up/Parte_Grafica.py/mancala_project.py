@@ -13,12 +13,12 @@ RED = (255, 0, 0)
 
 
 class Mancala:
-    def __init__(self, player1_avatar, player2_avatar, difficulty, game_mode):
+    def __init__(self,  difficulty, game_mode): #player1_avatar, player2_avatar,
         self.board = [[4] * 6, [4] * 6]
         self.stores = [0, 0]
         self.current_player = 0
-        self.player1_avatar = player1_avatar
-        self.player2_avatar = player2_avatar
+        #self.player1_avatar = player1_avatar
+        #self.player2_avatar = player2_avatar
         self.difficulty = difficulty
         self.game_mode = game_mode
         self.game_over = False
@@ -32,12 +32,12 @@ class Mancala:
 
         # Load images
         self.board_img = pygame.image.load("board.png")
-        self.pit_img = pygame.image.load("pit.png")
-        self.store_img = pygame.image.load("store.png")
-        self.avatars = {
+        '''self.pit_img = pygame.image.load("pit.png")
+            self.store_img = pygame.image.load("store.png")
+            self.avatars = {
             0: pygame.image.load(player1_avatar),
             1: pygame.image.load(player2_avatar),
-        }
+        }'''
 
         # Set font
         self.font = pygame.font.SysFont(None, 48)
