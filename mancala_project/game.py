@@ -1,7 +1,7 @@
 from mancalaEngine import GameState
 from players import Human, Machine
 
-machine_level = 6
+default_ai_dificulty = 6
 
 
 def humans_game():
@@ -42,4 +42,4 @@ def play_game(player_0, player_1, stealing_mode=True):
 
 
 if __name__ == "__main__":
-    machine_machine_game(machine_level, machine_level)
+    machine_machine_game(default_ai_dificulty, default_ai_dificulty)
