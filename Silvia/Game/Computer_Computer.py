@@ -19,47 +19,26 @@ class Mancala:
         self.aux = pit_init -1
         self.seed = seed
         self.board = [[self.seed]*self.pit_init, [self.seed]*self.pit_init]
-        self.blankspace = self.total_pit + 1
+        self.blankspace = self.total_pit + self.total_pit//3 # alignment of the stores
 
 
     def display_board(self):
-        print("\n" + "  ", end="")
+        print("\n" +"+--"+"---" *self.pit_init + "--+" )
+        print( "  ", end="")
         for i in range(pit_init):
             print(str(self.board[1][i]).rjust(2), end=" ")
         print("\n", self.stores[1], " "*self.blankspace, self.stores[0])
         print("  ", end="")
         for i in range(pit_init):
             print(str(self.board[0][i]).rjust(2), end=" ")
-        print("\n")
+        print("\n" +"+--"+"---" *self.pit_init + "--+" + "\n" )
+
 
     def choose_pit(self):
         valid_pits = [i for i in range(pit_init) if self.board[self.current_player][i] != 0]
         return random.choice(valid_pits)
-    
-    def make_move(self, pit):
-        player = pit // self.total_pit
-        pit_index = pit % self.total_pit
-        seeds = self.board[player][pit_index]
-        self.board[player][pit_index] = 0
-        while seeds > 0:
-            pit_index = (pit_index + 1) % (2 * self.total_pit)
-            if pit_index == pit:
-                continue
-            if pit_index // self.total_pit == player:
-                self.board[player][pit_index % self.total_pit] += 1
-            else:
-                self.board[1 - player][pit_index % self.total_pit] += 1
-            seeds -= 1
-        if pit_index // self.total_pit == player and self.board[player][pit_index % self.total_pit] == 1:
-            opposite_pit_index = (self.total_pit - 1) - (pit_index % self.total_pit)
-            opposite_seeds = self.board[1 - player][opposite_pit_index]
-            self.board[player][pit_index % self.total_pit] = 0
-            self.board[1 - player][opposite_pit_index] = 0
-            self.stores[player] += 1 + opposite_seeds
-        else:
-            self.stores[player] += 0
 
-    '''def make_move(self, pit):
+    def make_move(self, pit):
         stones = self.board[self.current_player][pit]
         self.board[self.current_player][pit] = 0
         self.player_store = self.stores[self.current_player]
@@ -78,7 +57,7 @@ class Mancala:
             self.stores[self.current_player] += self.board[1 - self.current_player][self.aux - pit % pit_init] + 1
             self.board[1 - self.current_player][self.aux - pit % pit_init] = 0
         self.current_player = 1 - self.current_player
-        return False '''
+        return False 
     
     '''
     def make_move(self, pit):
@@ -104,7 +83,7 @@ class Mancala:
         self.current_player = 1 - self.current_player
         return False '''
 
-
+    
     def game_over(self):
         return all(x == 0 for x in self.board[0]) or all(x == 0 for x in self.board[1])
 

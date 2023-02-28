@@ -37,9 +37,10 @@ while(playing):
     pit_head_1= "    "
     pit_head_2= "    "
 
-    i= pit-1
-    for element in reversed(binAmount):
-        binAmount[i] = int(binAmount[i])
+    #i= pit-1
+    #for element in reversed(binAmount):
+    for i in range(pit, pit_init -1, -1):
+        #binAmount[i] = int(binAmount[i])
         if i > store1  and i < store2:
             if i < 10:
                 pit_head_1+= "    " + str(i)
@@ -63,10 +64,11 @@ while(playing):
             else:
                 line_3 += str(binAmount[i]) +" +" +"----+"* pit_init
             
-        i -=1
+        
+        #i -=1
 
     #for i, element in enumerate(binAmount):
-    for i in range (pit):
+    for i in range (pit_init+1):
         binAmount[i] = int(binAmount[i])
         if  i < store1 : 
             if i < 10:
@@ -81,7 +83,7 @@ while(playing):
 
         elif  i == store1 :
             line_2 +=  "   |"
-            break
+            
 
     
     if not(playerOne):
