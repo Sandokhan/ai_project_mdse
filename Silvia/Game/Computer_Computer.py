@@ -104,7 +104,7 @@ class Mancala:
                 self.display_board()
                 continue
         self.display_board()
-        print(self.determine_winner())
+        print("Game Over!" + "\n" +self.determine_winner())
 
 game = Mancala(pit_init, seed)
 game.play()
