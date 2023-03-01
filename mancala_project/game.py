@@ -1,6 +1,7 @@
 from mancalaEngine import GameState
 from players import Human, Machine
 import time
+import psutil
 
 machine_level = 6
 
@@ -46,6 +47,7 @@ def run_n_matches(n, max_time=3600):
     start_time = time.time()
 
     results = [0, 0, 0]
+    memory_used = 0
     while n > 0 and time.time() - start_time < max_time:
         n -= 1
         player_0 = Machine(0, machine_level)
@@ -58,11 +60,13 @@ def run_n_matches(n, max_time=3600):
             else:
                 game_state = player_1.move(game_state)
         results[game_state.winner] += 1
+        memory_used = max(memory_used, psutil.Process().memory_info().rss)
 
     print("\n=== Elapsed time: %s seconds ===" % (int(time.time() - start_time)))
     print(f"  Player 1: {results[1]} victories")
     print(f"  Player 2: {results[2]} victories")
     print(f"  Draws: {results[0]} ")
+    print(f"  Maximum memory usage: {memory_used / (1024 * 1024)} MB")
     print("===============================")
 
 
