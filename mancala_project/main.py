@@ -20,8 +20,8 @@ def main():
     p_zero = "Human" if playerOne != 'm' else "Machine"
     p_one = "Human" if playerTwo != 'm' else "Machine"
 
-    players_zero = Human(0) if playerOne != 'm' else Machine(0, levelOne)
-    players_one = Human(1) if playerTwo != 'm' else Machine(1, levelTwo)
+    players_zero = Human(0) if playerOne != 'm' else Machine(1, levelOne)
+    players_one = Human(1) if playerTwo != 'm' else Machine(0, levelTwo)
 
     print("Ready, Players!\n")
     print(f"{p_zero} vs {p_one}")

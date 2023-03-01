@@ -23,7 +23,7 @@ class Human(Player):
                 move = move + 7
 
         new_state = state.make_move(move)
-        return
+        return new_state
 
 
 class Machine(Player):

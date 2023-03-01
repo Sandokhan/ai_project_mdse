@@ -5,26 +5,26 @@ machine_level = 6
 
 
 def humans_game():
-    player_0 = Human(1)
-    player_1 = Human(2)
+    player_0 = Human(0)
+    player_1 = Human(1)
     play_game(player_0, player_1)
 
 
 def human_machine_game(ai_difficulty):
-    player_0 = Human(1)
-    player_1 = Machine(2, ai_difficulty)
+    player_0 = Human(0)
+    player_1 = Machine(1, ai_difficulty)
     play_game(player_0, player_1)
 
 
 def machine_player_game(ai_difficulty):
-    player_0 = Machine(1, ai_difficulty)
-    player_1 = Human(2)
+    player_0 = Machine(0, ai_difficulty)
+    player_1 = Human(1)
     play_game(player_0, player_1)
 
 
 def machine_machine_game(ai0_difficulty, ai1_difficulty):
-    player_0 = Machine(1, ai0_difficulty)
-    player_1 = Machine(2, ai1_difficulty)
+    player_0 = Machine(0, ai0_difficulty)
+    player_1 = Machine(1, ai1_difficulty)
     play_game(player_0, player_1)
 
 
@@ -42,4 +42,5 @@ def play_game(player_0, player_1, stealing_mode=True):
 
 
 if __name__ == "__main__":
-    machine_machine_game(machine_level, machine_level)
+    #machine_machine_game(machine_level, machine_level)
+    human_machine_game(machine_level)
