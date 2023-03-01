@@ -15,7 +15,7 @@ class PocketName:
 
 
 class GameState:
-    def __init__(self, init_state=initial_board, player_turn=1, stealing=True):
+    def __init__(self, init_state=initial_board, player_turn=0, stealing=True):
         self.state = init_state
         self.player_turn = player_turn
         self.stealing = stealing
@@ -54,7 +54,7 @@ class GameState:
 
     def make_move(self, move):
         # assumes that the move is valid
-        player0_turn = self.player_turn == 0
+        player1_turn = self.player_turn == 0
 
         new_state = deepcopy(self.state)
         hand = new_state[move]
@@ -62,26 +62,26 @@ class GameState:
 
         while hand > 0:
             move = (move + 1) % PocketName.num_pockets
-            if (player0_turn and move == PocketName.p1_mancala) or (not player0_turn and move == PocketName.p0_mancala):
+            if (player1_turn and move == PocketName.p1_mancala) or (not player1_turn and move == PocketName.p0_mancala):
                 # skip opponent's mancala
                 continue
             hand -= 1
             new_state[move] += 1
 
         if self.stealing:
-            if (player0_turn and move in PocketName.p0_pockets) or (not player0_turn and move in PocketName.p1_pockets):
+            if (player1_turn and move in PocketName.p0_pockets) or (not player1_turn and move in PocketName.p1_pockets):
                 if new_state[move] == 1:
                     # steal marbles from opposite pocket if your pocket was empty
                     opposite_move = 12 - move
                     hand = new_state[move] + new_state[opposite_move]
                     new_state[move], new_state[opposite_move] = 0, 0
 
-                    if player0_turn:
+                    if player1_turn:
                         new_state[PocketName.p0_mancala] += hand
                     else:
                         new_state[PocketName.p1_mancala] += hand
 
-        if (player0_turn and move == PocketName.p0_mancala) or (not player0_turn and move == PocketName.p1_mancala):
+        if (player1_turn and move == PocketName.p0_mancala) or (not player1_turn and move == PocketName.p1_mancala):
             # play again if last piece is put in your own mancala
             next_player = self.player_turn
         else:
