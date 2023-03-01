@@ -1,6 +1,7 @@
 from aiEngine import minimax, minimax_alpha_beta
 
 
+
 class Player:
     def __init__(self, player_id):
         self.player_id = player_id
@@ -24,7 +25,6 @@ class Human(Player):
 
         new_state = state.make_move(move)
         return new_state
-
 
 class Machine(Player):
     def __init__(self, player_id, difficulty):

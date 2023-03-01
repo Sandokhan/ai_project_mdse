@@ -1,5 +1,6 @@
 from mancalaEngine import GameState
 from players import Human, Machine
+import time
 
 machine_level = 6
 
@@ -41,6 +42,31 @@ def play_game(player_0, player_1, stealing_mode=True):
     game_state.show_winning_message()
 
 
+def run_n_matches(n, max_time=3600):
+    start_time = time.time()
+
+    results = [0, 0, 0]
+    while n > 0 and time.time() - start_time < max_time:
+        n -= 1
+        player_0 = Machine(0, machine_level)
+        player_1 = Machine(1, machine_level)
+        game_state = GameState()
+        game_state.stealing = True
+        while not game_state.is_terminal():
+            if game_state.player_turn == 0:
+                game_state = player_0.move(game_state)
+            else:
+                game_state = player_1.move(game_state)
+        results[game_state.winner] += 1
+
+    print("\n=== Elapsed time: %s seconds ===" % (int(time.time() - start_time)))
+    print(f"  Player 1: {results[1]} victories")
+    print(f"  Player 2: {results[2]} victories")
+    print(f"  Draws: {results[0]} ")
+    print("===============================")
+
+
 if __name__ == "__main__":
-    #machine_machine_game(machine_level, machine_level)
-    human_machine_game(machine_level)
+    # machine_machine_game(machine_level, machine_level)
+    # human_machine_game(machine_level)
+    run_n_matches(2)
