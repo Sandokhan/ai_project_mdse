@@ -43,15 +43,15 @@ def play_game(player_0, player_1, stealing_mode=True):
     game_state.show_winning_message()
 
 
-def run_n_matches(n, max_time=3600):
+def run_n_matches(n, m1_level, m2_level, max_time=3600):
     start_time = time.time()
 
     results = [0, 0, 0]
     memory_used = 0
     while n > 0 and time.time() - start_time < max_time:
         n -= 1
-        player_0 = Machine(0, machine_level)
-        player_1 = Machine(1, machine_level)
+        player_0 = Machine(0, m1_level)
+        player_1 = Machine(1, m2_level)
         game_state = GameState()
         game_state.stealing = True
         while not game_state.is_terminal():
@@ -71,6 +71,6 @@ def run_n_matches(n, max_time=3600):
 
 
 if __name__ == "__main__":
-    # machine_machine_game(machine_level, machine_level)
+    #machine_machine_game(machine_level, machine_level)
     # human_machine_game(machine_level)
-    run_n_matches(2)
+    run_n_matches(2,4,6)
