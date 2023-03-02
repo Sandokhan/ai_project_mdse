@@ -18,37 +18,38 @@ def static_eval(game_state):
     return value
 
 
-def minimax(state, depth, maximizing_player):
+def minimax(state, depth):
     if depth <= 0 or state.is_terminal():
         return None, static_eval(state)
-    if maximizing_player:
-    # maximizer
+
+    if state.player_turn == 0:  # maximizer
         value = ninf
         best_move = None
 
-    for move, child in state.children():
-        _, child_value = minimax(child, depth - 1, False)
-        if child_value > value:
-            value = child_value
-            best_move = move
-            return best_move, value
-    else:
-    # minimizer
+        for move, child in state.children():
+            _, child_value = minimax(child, depth - 1)
+            if child_value > value:
+                value = child_value
+                best_move = move
+        return best_move, value
+
+    else:  # player 1: minimizer
         value = pinf
         best_move = None
+
         for move, child in state.children():
-            _, child_value = minimax(child, depth - 1, True)
+            _, child_value = minimax(child, depth - 1)
             if child_value < value:
                 value = child_value
                 best_move = move
         return best_move, value
 
 
-def minimax_alpha_beta(state, depth, maximizing_player_prunne, alpha=ninf, beta=pinf):
+def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf):
     if depth == 0 or state.is_terminal():
         return None, static_eval(state)
 
-    if maximizing_player_prunne:  # maximizer
+    if state.player_turn == 0:  # maximizer
         value = ninf
         best_move = None
 
@@ -62,7 +63,7 @@ def minimax_alpha_beta(state, depth, maximizing_player_prunne, alpha=ninf, beta=
                 break
         return best_move, value
 
-    else:  #  minimizer
+    else:  # player 1: minimizer
         value = pinf
         best_move = None
 

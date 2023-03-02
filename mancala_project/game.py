@@ -71,6 +71,6 @@ def run_n_matches(n, m1_level, m2_level, max_time=3600):
 
 
 if __name__ == "__main__":
-    #machine_machine_game(machine_level, machine_level)
+    # machine_machine_game(machine_level, machine_level)
     # human_machine_game(machine_level)
-    run_n_matches(2,4,2)
+    run_n_matches(1, 4, 2)
