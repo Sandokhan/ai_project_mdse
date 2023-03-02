@@ -17,6 +17,7 @@ while True:
         print("Invalid input. Please enter a valid number.")
 
 initial_board = np.array(([seed] * pit_num + [0]) * 2) 
+turn= np.random.choice([0, 1])
 
 class PocketName:
     num_pockets = pit_num *2 +2 
@@ -25,10 +26,11 @@ class PocketName:
     p1_mancala = num_pockets -1 
     p0_pockets = list(range(pit_num)) 
     p1_pockets = list(range(pit_num *2, pit_num , -1)) 
+    
 
 
 class GameState:
-    def __init__(self, init_state=initial_board, player_turn=0, stealing=True):
+    def __init__(self, init_state=initial_board, player_turn=turn, stealing=True):
         self.state = init_state
         self.player_turn = player_turn
         self.stealing = stealing

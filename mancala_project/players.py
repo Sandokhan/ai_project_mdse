@@ -1,5 +1,5 @@
 from aiEngine import minimax, minimax_alpha_beta
-from mancalaEngine import PocketName
+from mancalaEngine import PocketName , GameState
 
 
 class Player:
@@ -32,7 +32,19 @@ class Machine(Player):
         self.max_depth = 2 * difficulty - 1
 
     def move(self, state):
-        move, value = minimax_alpha_beta(state, self.max_depth)
+        self.turn = GameState.player_turn
+        if self.turn == 0:
+            move, value = minimax_alpha_beta(state, self.max_depth,True)
+        else:
+            move, value = minimax_alpha_beta(state, self.max_depth,False)
+        if self.turn == 1:
+            move, value = minimax_alpha_beta(state, self.max_depth,True)
+        else:
+            move, value = minimax_alpha_beta(state, self.max_depth,False)
+
+        
+
+        move, value = minimax_alpha_beta(state, self.max_depth,)
 
         printed_move = move - PocketName.p0_mancala+1 if self.player_id == 1 else move
 
