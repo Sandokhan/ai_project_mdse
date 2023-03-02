@@ -44,7 +44,6 @@ def main():
 
     print("\nReady, Players!\n")
     print(f"{p_zero} vs {p_one}")
-
     play_game(players_zero, players_one, stealing_mode)
 
 

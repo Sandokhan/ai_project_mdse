@@ -3,14 +3,12 @@ from copy import deepcopy
 import numpy as np
 
 print("\nWelcome to Mancala Project!\n")
-
 while True:
     try:
         pit_num = int(input("Enter number of pits: "))
         break
     except ValueError:
         print("Invalid input. Please enter a valid number.")
-
 while True:
     try:
         seed = int(input("Enter number of seeds: "))
@@ -18,16 +16,15 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a valid number.")
 
-initial_board = np.array(([seed] * pit_num + [0]) * 2) #np.array(([4] * 6 + [0]) * 2)
+initial_board = np.array(([seed] * pit_num + [0]) * 2) 
 
 class PocketName:
-    num_pockets = pit_num *2 +2 #num_pockets = 14
+    num_pockets = pit_num *2 +2 
     seed = seed
-    p0_mancala = pit_num# p0_mancala = 6
-    p1_mancala = num_pockets -1 #p1_mancala = 13
-
-    p0_pockets = list(range(pit_num))  #list(range(6))
-    p1_pockets = list(range(pit_num *2, pit_num , -1)) #list(range(12, 6, -1))
+    p0_mancala = pit_num
+    p1_mancala = num_pockets -1 
+    p0_pockets = list(range(pit_num)) 
+    p1_pockets = list(range(pit_num *2, pit_num , -1)) 
 
 
 class GameState:
@@ -36,7 +33,6 @@ class GameState:
         self.player_turn = player_turn
         self.stealing = stealing
         self.winner = None
-
 
     def show(self):
         print()
@@ -48,21 +44,22 @@ class GameState:
             self.blankspace = pit_num 
         else :
             self.blankspace = pit_num + len(str(seed)) +1
-
         for i in range(pit_num-1,-1,-1):
             if i == pit_num-1:
                 self.head_1 +="  " + str(i)
             else:
-                if len(str(seed)) > 2:
+                if len(str(seed)) == 3:
+                    self.head_1 +="   " + str(i)
+                elif len(str(seed)) >=4 :
                     self.head_1 +="    " + str(i)
                 else:
-                    self.head_1 +="   " + str(i)
-        
+                    self.head_1 +="  " + str(i)
         print("\n" + self.head_1) 
+
         if len(str(seed)) <= 2:
             print("+---"+"---" *pit_num + "--+" )
         else :
-            print("+----"+"----" *pit_num + "--+" )
+            print("+-----"+"----" *pit_num + "--+" )
         print( "  ", end=" ")
         for i in range(pit_num *2, pit_num -1, -1):
             if i > PocketName.p0_mancala and i < PocketName.p1_mancala:
@@ -75,15 +72,17 @@ class GameState:
         if len(str(seed)) <= 2:
             print("\n+---"+"---" *pit_num + "--+" )
         else :
-            print("\n+----"+"----" *pit_num + "--+" )
+            print("\n+-----"+"----" *pit_num + "--+" )
         for j in range(pit_num):
             if j ==0:
                 self.head_2 +="  " + str(j)
             else:
-                if len(str(seed)) > 2:
+                if len(str(seed)) ==3 :
+                    self.head_2 +="   " + str(j)
+                elif len(str(seed)) >=4 :
                     self.head_2 +="    " + str(j)
                 else:
-                    self.head_2 +="   " + str(j)
+                    self.head_2 +="  " + str(j)
         print(self.head_2)
 
     def show_winning_message(self):
