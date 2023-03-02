@@ -126,7 +126,7 @@ while(playing):
         if playerOne and recipient == store2:
             recipient = 0
         if not(playerOne) and recipient == store1:
-            recipient = 0
+            recipient = store1 +1
         binAmount[recipient] += 1
         give_away -=1
         if give_away == 0:

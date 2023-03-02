@@ -56,7 +56,7 @@ class GameState:
                 if len(str(seed)) > 2:
                     self.head_1 +="    " + str(i)
                 else:
-                    self.head_1 +="   " + str(i)
+                    self.head_1 +=" " + str(i)
         
         print("\n" + self.head_1) 
         if len(str(seed)) <= 2:
@@ -83,7 +83,7 @@ class GameState:
                 if len(str(seed)) > 2:
                     self.head_2 +="    " + str(j)
                 else:
-                    self.head_2 +="   " + str(j)
+                    self.head_2 +=" " + str(j)
         print(self.head_2)
 
     def show_winning_message(self):

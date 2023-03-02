@@ -19,12 +19,13 @@ class Mancala:
         self.binAmount[self.store1] = 0
         self.binAmount[self.store2] = 0
         self.blankspace = self.pit_init * 2 + (self.pit_init)
-        self.playerOne =  False #self.current_player = 0 # True if player One is playing else Player Two is playing
+        self.playerOne = True #self.current_player = 0 # True if player One is playing else Player Two is playing
         self.message = 0
         self.give_away =0
         self.sideOne = 0
         self.sideTwo = 0
         self.UserInput = None
+        self.Playing = True
 
     def print_message(self, playerOne):
         self.playerOne = playerOne
@@ -85,40 +86,27 @@ class Mancala:
             self.give_away -=1
             self.recipient += 1
         
-        if self.give_away == 0:
-            if self.recipient > self.store2: 
-                self.recipient = 0 
-                self.last_recipient = self.recipient
-            else:
-                self.last_recipient = self.recipient
-    
+        self.last_recipient = self.recipient
         self.oponent_recipient = self.store2 - 1 - self.last_recipient
                 
-        if self.playerOne:
-            if self.binAmount[self.last_recipient] == self.store1:
-                self.binAmount[self.store1] +=1
-                self.playerOne = True
-            elif self.binAmount[self.last_recipient] == 1 and self.last_recipient < self.store1 and  self.binAmount[self.store2 - 1 - self.last_recipient] >0:
-                self.binAmount[self.store1] += self.binAmount[self.last_recipient] + self.binAmount[self.store2 - 1 - self.last_recipient]
-                self.binAmount[self.last_recipient] = 0
-                self.binAmount[self.store2 - 1 - self.last_recipient] = 0
-                self.playerOne = not(self.playerOne)
-                self.capture = True
-            else:
-                self.playerOne = not(self.playerOne)
-
-        if not(self.playerOne):
-            if self.last_recipient == self.store2:
-                self.binAmount[self.store2] +=1
-                self.playerOne = False
-            elif self.binAmount[self.last_recipient] == 1 and self.last_recipient > self.store1 and self.last_recipient < self.store1 and self.binAmount[self.store2 - 1 - self.last_recipient] >0:
-                self.binAmount[self.store2] += self.binAmount[self.last_recipient] + self.binAmount[self.store2 - 1 - self.last_recipient]
-                self.binAmount[self.last_recipient] = 0
-                self.binAmount[self.store2 - 1 - self.last_recipient] = 0
-                self.playerOne = not(self.playerOne)
-                self.capture = True
-            else:
-                self.playerOne = not(self.playerOne)
+        if self.playerOne and self.binAmount[self.last_recipient] == 1  and self.binAmount[self.oponent_recipient] > 0: #and self.last_recipient < self.store1
+            self.capture = True
+            self.binAmount[self.store1] += self.binAmount[self.last_recipient] + self.binAmount[self.oponent_recipient]
+            self.binAmount[self.last_recipient] = 0
+            self.binAmount[self.oponent_recipient ] = 0 # last seed ends on a empty pit and there's seeds on the opposite side - all seeds are captured into palyer One's store 
+            #self.playerOne = not(self.playerOne)
+            return self.capture, self.playerOne
+        elif not(self.playerOne) and self.binAmount[self.last_recipient] == 1 and self.binAmount[self.oponent_recipient]: # and self.last_recipient > self.store1 
+            self.capture = True
+            self.binAmount[self.store2] += self.binAmount[self.last_recipient] + self.binAmount[self.oponent_recipient]
+            self.binAmount[self.last_recipient] = 0
+            self.binAmount[self.oponent_recipient ] = 0
+            #self.playerOne = not(self.playerOne)
+            return self.capture, self.playerOne# last seed ends on a empty pit and there's seeds on the opposite side - all seeds are captured into palyer Two's store 
+        elif self.playerOne and self.binAmount[self.last_recipient] == self.store1:  
+            self.playerOne = True # if the last seed of player One end on his store, he plays again
+        elif not(self.playerOne) and self.last_recipient == self.store2:
+            self.playerOne = False # if the last seed of player Two end on his store, he plays again
         
         return self.capture, self.playerOne
 
@@ -127,14 +115,14 @@ class Mancala:
         for j in range (self.store1) :
             self.sideOne += self.binAmount[j]
             self.sideTwo += self.binAmount[j + self.store1 +1]
-        if self.sideOne == 0 and self.sideTwo == 0 :
-            return True
-        elif self.sideOne == 0 or self.sideTwo == 0 :
+        if self.sideOne == 0 or self.sideTwo == 0 :
             self.binAmount[self.store1] += self.sideOne
             self.binAmount[self.store2] += self.sideTwo
             for k in range (self.store1):
                 self.binAmount[k] = 0
                 self.binAmount[k+self.store1+1] = 0
+            return True
+        if self.sideOne == 0 and self.sideTwo == 0 :
             return True
         return False
         

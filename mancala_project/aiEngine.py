@@ -1,4 +1,5 @@
 import numpy as np
+from mancalaEngine import PocketName
 
 pinf = np.inf
 ninf = - np.inf
@@ -6,14 +7,14 @@ ninf = - np.inf
 
 def static_eval(game_state):
     if game_state.is_terminal():
-        if game_state.state[6] > game_state.state[13]:
+        if game_state.state[PocketName.p0_mancala] > game_state.state[PocketName.p1_mancala]:
             value = 100
-        elif game_state.state[6] == game_state.state[13]:
+        elif game_state.state[PocketName.p0_mancala] == game_state.state[PocketName.p1_mancala]:
             value = 0
         else:
             value = -100
     else:
-        value = game_state.state[6] - game_state.state[13]
+        value = game_state.state[PocketName.p0_mancala] - game_state.state[PocketName.p1_mancala]
     return value
 
 
