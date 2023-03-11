@@ -54,6 +54,27 @@ def simple_score(game_state):
     return player_score - opponent_score
 
 
+def material_advantage(game_state):
+    """
+    Evaluate the material advantage of the given game state and return a numeric value representing the expected
+    outcome of the game.
+    The returned value is positive if the current player has a material advantage, negative if they have a
+       disadvantage, and zero if both players have equal amount of materials.
+
+       Args:
+           game_state: A `GameState` object representing the current state of the game.
+
+       Returns:
+           A numeric value representing the material advantage of the game.
+    """
+    player_material = sum(game_state.state[PocketName.p0_pockets])
+    opponent_material = sum(game_state.state[PocketName.p1_pockets])
+    player = game_state.current_player_id
+    if player == 1:
+        player_material, opponent_material = opponent_material, player_material
+    return player_material - opponent_material
+
+
 def minimax(state, depth):
     """
         The minimax algorithm is a recursive algorithm used to find the optimal move in a two-player, zero-sum game.
