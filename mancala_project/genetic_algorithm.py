@@ -1,5 +1,5 @@
-
 import random
+
 
 # Define the game of Mancala
 class Mancala:
@@ -25,6 +25,7 @@ class Mancala:
 
     def score(self):
         return self.board[6] - self.board[13]
+
 
 # Define the genetic algorithm
 class GeneticAlgorithm:
@@ -77,6 +78,7 @@ class GeneticAlgorithm:
 
         best_individual = max(range(POPULATION_SIZE), key=lambda i: self.fitness[i])
         print("\nBest individual:", self.population[best_individual], "with fitness:", self.fitness[best_individual])
+
 
 # Run the genetic algorithm
 if __name__ == '__main__':
