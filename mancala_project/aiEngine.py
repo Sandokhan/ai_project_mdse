@@ -75,25 +75,27 @@ def material_advantage(game_state):
     return player_material - opponent_material
 
 
-def minimax(state, depth):
+def minimax(state, depth, evaluation_func=static_eval):
     """
         The minimax algorithm is a recursive algorithm used to find the optimal move in a two-player, zero-sum game.
         It explores the game tree by alternating between maximizing and minimizing the value of each node until it
         reaches a leaf node or a specified depth.
 
         Args:
-            state: A `GameState` object representing the current state of the game.
-            depth: An integer representing the maximum depth to explore the game tree.
+        state: A `GameState` object representing the current state of the game.
+        depth: An integer representing the maximum depth to explore the game tree.
+        evaluation_func: A function that takes a `GameState` object and returns a numeric value representing the
+        expected outcome of the game. the evaluation function used to evaluate game states, defaults to static_eval.
 
         Returns:
-            A tuple containing the best move and its corresponding value for the current player. If the current player is
-            the maximizer, the best move is the move that leads to the maximum value, and if the current player is the
-            minimizer, the best move is the move that leads to the minimum value. The value of the best move is returned
-            as the second element of the tuple. If the game has ended or the maximum depth has been reached, the function
-            returns None as the best move and the static evaluation of the current state as the value.
+            A tuple containing the best move and its corresponding value for the current player. If the current player
+            is the maximizer, the best move is the move that leads to the maximum value, and if the current player is
+            the minimizer, the best move is the move that leads to the minimum value. The value of the best move is
+            returned as the second element of the tuple. If the game has ended or the maximum depth has been reached,
+            the function returns None as the best move and the static evaluation of the current state as the value.
         """
     if depth <= 0 or state.is_terminal():
-        return None, static_eval(state)
+        return None, evaluation_func(state)
 
     if state.player_turn == 0:  # maximizer
         value = ninf
@@ -118,7 +120,7 @@ def minimax(state, depth):
         return best_move, value
 
 
-def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf):
+def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf, eval_func=static_eval):
     """
     Perform minimax search with alpha-beta pruning to find the optimal move for the current player at a given state.
     Args:
@@ -126,6 +128,7 @@ def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf):
     - depth: the maximum search depth
     - alpha: the alpha value used for alpha-beta pruning, defaults to negative infinity
     - beta: the beta value used for alpha-beta pruning, defaults to positive infinity
+    - eval_func: the evaluation function used to evaluate game states, defaults to static_eval
 
     Returns:
     - best_move: the optimal move for the current player
@@ -133,7 +136,7 @@ def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf):
     """
 
     if depth == 0 or state.is_terminal():
-        return None, static_eval(state)
+        return None, eval_func(state)
 
     if state.player_turn == 0:  # maximizer
         value = ninf

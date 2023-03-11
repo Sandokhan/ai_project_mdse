@@ -28,12 +28,13 @@ class Human(Player):
 
 
 class Machine(Player):
-    def __init__(self, player_id, difficulty):
+    def __init__(self, player_id, difficulty, eval_func):
         super().__init__(player_id)
         self.max_depth = 2 * difficulty - 1
+        self.eval_func = eval_func
 
     def move(self, state):
-        move, value = minimax_alpha_beta(state, self.max_depth)
+        move, value = minimax_alpha_beta(state, self.max_depth, eval_func=self.eval_func)
 
         printed_move = move - PocketName.p0_mancala + 1 if self.player_id == 1 else move
 
