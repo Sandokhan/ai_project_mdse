@@ -41,10 +41,10 @@ def main():
 
     eval_func = None
     if levelOne or levelTwo:
-        eval_func = input("Choose evaluation function (1 for baby AI, 2 for teenager AI, 3 for adult AI): ")
+        eval_func = input("Choose evaluation function (1 for Static, 2 for Simple score, 3 for Material advantage): ")
         while eval_func.strip() != '1' and eval_func.strip() != '2' and eval_func.strip() != '3':
-            eval_func = input("Invalid input. Please choose evaluation function (1 for baby AI, 2 for teenager AI, "
-                              "3 for adult AI): ")
+            eval_func = input("Invalid input. Please choose evaluation function (1 for Static, 2 for Simple score, "
+                              "3 for Material advantage): ")
         eval_func = int(eval_func.strip())
 
     if eval_func == 1:
