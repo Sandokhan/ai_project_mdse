@@ -43,7 +43,7 @@ def play_game(player_0, player_1, stealing_mode=True):
     game_state.show_winning_message()
 
 
-def run_n_matches(n, m1_difficulty, m1_eval_func, m2_difficulty, m2_eval_func, max_time=3600):
+def run_n_matches(n, m1_difficulty, m2_difficulty, m1_eval_func=None, m2_eval_func=None, max_time=3600):
     start_time = time.time()
 
     results = [0, 0, 0]
@@ -73,4 +73,4 @@ def run_n_matches(n, m1_difficulty, m1_eval_func, m2_difficulty, m2_eval_func, m
 if __name__ == "__main__":
     # machine_machine_game(machine_level, machine_level)
     # human_machine_game(machine_level)
-    run_n_matches(5, 2, 2, 4, 3)
+    run_n_matches(10, 4, 2, 2, None)

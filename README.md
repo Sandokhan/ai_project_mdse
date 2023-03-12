@@ -49,15 +49,16 @@ a friend to play with.
 
 ### Example of Usage 
 
-To start a game between a human player and a machine player with difficulty level 2, run the following code:
+To start a game between a human player and a machine player with difficulty level easy level and material_advantage as
+eval_function, run the following code:
 
 ```python
-from aiEngine import Machine
+from aiEngine import Machine, material_advantage
 from gameEngine import GameState, Human
 
 state = GameState()
 p1 = Human(1)
-p2 = Machine(0, 2)
+p2 = Machine(0, 2, 3)
 players = [p1, p2]
 
 while not state.is_terminal():

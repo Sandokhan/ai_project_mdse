@@ -61,5 +61,6 @@ def main():
     print(f"{p_zero} vs {p_one}")
     play_game(players_zero, players_one, stealing_mode)
 
+
 if __name__ == "__main__":
     main()

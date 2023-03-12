@@ -28,13 +28,17 @@ class Human(Player):
 
 
 class Machine(Player):
-    def __init__(self, player_id, difficulty, eval_func):
+    def __init__(self, player_id, difficulty, eval_func=None):
         super().__init__(player_id)
         self.max_depth = 2 * difficulty - 1
         self.eval_func = eval_func
 
     def move(self, state):
-        move, value = minimax_alpha_beta(state, self.max_depth, eval_func=self.eval_func)
+        if self.max_depth == 1:
+            move = self.random_move(state)
+            value = None
+        else:
+            move, value = minimax_alpha_beta(state, self.max_depth, eval_func=self.eval_func)
 
         printed_move = move - PocketName.p0_mancala + 1 if self.player_id == 1 else move
 
@@ -43,3 +47,4 @@ class Machine(Player):
 
         new_state = state.make_move(move)
         return new_state
+

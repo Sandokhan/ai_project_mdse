@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from mancalaEngine import PocketName
 
 pinf = np.inf
@@ -73,6 +74,18 @@ def material_advantage(game_state):
     if player == 1:
         player_material, opponent_material = opponent_material, player_material
     return player_material - opponent_material
+
+
+def random_move(state):
+    """
+    Returns a random move from the current state of the game.
+    """
+    possible_moves = list(state.possible_moves())
+    if len(possible_moves) == 0:
+        return state
+    move = random.choice(possible_moves)
+    new_state = state.make_move(move)
+    return new_state
 
 
 def minimax(state, depth, evaluation_func=static_eval):
