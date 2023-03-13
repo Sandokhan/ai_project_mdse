@@ -121,7 +121,7 @@ class GameState:
         while hand > 0:
             move = (move + 1) % PocketName.num_pockets
             if (player0_turn and move == PocketName.p1_mancala) or (not player0_turn and move == PocketName.p0_mancala):
-                # skip opponent's mancala
+                # skip opponent's side
                 continue
             hand -= 1
             new_state[move] += 1
@@ -129,7 +129,7 @@ class GameState:
         if self.stealing:
             if (player0_turn and move in PocketName.p0_pockets) or (not player0_turn and move in PocketName.p1_pockets):
                 if new_state[move] == 1:
-                    # steal marbles from opposite pocket if your pocket was empty
+                    # steal seeds from opponent
                     opposite_move = pit_num * 2 - move
                     hand = new_state[move] + new_state[opposite_move]
                     new_state[move], new_state[opposite_move] = 0, 0
@@ -141,7 +141,7 @@ class GameState:
                         new_state[PocketName.p1_mancala] += hand
 
         if (player0_turn and move == PocketName.p0_mancala) or (not player0_turn and move == PocketName.p1_mancala):
-            # play again if last price is put in your own mancala
+            # play again 
             next_player = self.player_turn
         else:
             next_player = 1 - self.player_turn
@@ -167,5 +167,4 @@ class GameState:
 
 if __name__ == "__main__":
     game_state = GameState()
-    # print(game_state.state)
     game_state.show()

@@ -1,5 +1,5 @@
 from game import play_game
-from aiEngine import static_eval, simple_score, material_advantage
+from aiEngine import static_eval, simple_score, material_advantage, extra_turn, rightside_pit,many_moves, keep_on_own_side, closest_to_opponent
 from players import Human, Machine
 
 
@@ -41,18 +41,35 @@ def main():
 
     eval_func = None
     if levelOne or levelTwo:
-        eval_func = input("Choose evaluation function (1 for Static, 2 for Simple score, 3 for Material advantage): ")
-        while eval_func.strip() != '1' and eval_func.strip() != '2' and eval_func.strip() != '3':
-            eval_func = input("Invalid input. Please choose evaluation function (1 for Static, 2 for Simple score, "
-                              "3 for Material advantage): ")
-        eval_func = int(eval_func.strip())
+        while True:
+            try:
+                eval_func = int(input("Choose evaluation function:\n 1 for Static\n 2 for Simple Score\n 3 for Material Advantage\n 4 for Extra Turn"
+                    +"\n 5 for Right Side Pit\n 6 for Many Moves\n 7 for Keep on Own side\n 8 for Closest to Opponent: "))
+                break
+            except ValueError:
+                print("Error: Invalid input. Please enter a valid level.")
+       
+        while eval_func < 1 or eval_func  > 8  :
+            eval_func = int(input("Choose evaluation function:\n 1 for Static, 2 for Simple Score, 3 for Material Advantage, 4 for Extra Turn"
+                         +"\n 5 for Right Side Pit, 6 for Many Moves, 7 for Keep on Own side, 8 for Closest to Opponent: "))
 
     if eval_func == 1:
         eval_func = static_eval
     elif eval_func == 2:
         eval_func = simple_score
-    else:
+    elif eval_func == 3:
         eval_func = material_advantage
+    elif eval_func == 4:
+        eval_func = extra_turn
+    elif eval_func == 5:
+        eval_func = rightside_pit
+    elif eval_func == 6:
+        eval_func = many_moves
+    elif eval_func == 7:
+        eval_func = keep_on_own_side
+    else:
+        eval_func = closest_to_opponent
+    
 
     players_zero = Human(0) if playerOne != 'm' else Machine(1, levelOne, eval_func=eval_func)
     players_one = Human(1) if playerTwo != 'm' else Machine(0, levelTwo, eval_func=eval_func)

@@ -1,6 +1,5 @@
 import random
 
-
 # Define the game of Mancala
 class Mancala:
     def __init__(self):

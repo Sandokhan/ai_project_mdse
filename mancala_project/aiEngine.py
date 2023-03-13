@@ -78,18 +78,15 @@ def material_advantage(game_state):
 
 def extra_turn(game_state):
     """
-    Extra turn and capture heuristic.
+    Extra turn and capture heuristic. Choose the moove that gives an extra turn.
 
     Args:
     - board: list of integers representing the current board state
-    - pit: integer representing the pit where the last seed was sown
-    - player: integer representing the current player (0 or 1)
 
     Returns:
     - integer representing the number of seeds to add to the hoarded seeds value for the Right Side pit heuristic
     """
     pit = game_state.move
-    #player = GameState.player_turn
     player = game_state.current_player_id
     aux = PocketName.p0_mancala+1
 
@@ -117,16 +114,14 @@ def extra_turn(game_state):
 
 def rightside_pit(game_state):
     """
-    Hoard as many seeds as possible in one pit heuristic.
+    Hoard as many seeds as possible on the pit in the right side heuristic.
 
     Args:
-    - board: list of integers representing the current board state
-    - player: integer representing the current player (0 or 1)
+    - board: list of integers representing the current board stat
 
     Returns:
     - integer representing the heuristic value of the board for the given player
     """
-    #player = GameState.player_turn
     player = game_state.current_player_id
     aux = PocketName.p0_mancala+1
     # Find all pits that belong to the player
@@ -155,8 +150,6 @@ def keep_on_own_side(game_state):
 
     Args:
     - board: list of integers representing the current board state
-    - pit: integer representing the pit where the last seed was sown
-    - player: integer representing the current player (1 or 2)
 
     Returns:
     - integer representing the number of seeds to add to the hoarded seeds value for the H1 heuristic
@@ -192,7 +185,6 @@ def many_moves(game_state):
 
     Args:
     - board: list of integers representing the current board state
-    - player: integer representing the current player (0 or 1)
 
     Returns:
     - integer representing the number of seeds to add to the hoarded seeds value for the H1 heuristic
@@ -229,7 +221,6 @@ def closest_to_opponent(game_state):
 
     Args:
     - board: list of integers representing the current board state
-    - player: integer representing the current player (1 or 2)
 
     Returns:
     - integer representing the index of the pit to sow from
