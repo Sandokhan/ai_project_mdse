@@ -43,15 +43,15 @@ def main():
     if levelOne or levelTwo:
         while True:
             try:
-                eval_func = int(input("Choose evaluation function:\n 1 for Static\n 2 for Simple Score\n 3 for Material Advantage\n 4 for Extra Turn"
-                    +"\n 5 for Right Side Pit\n 6 for Many Moves\n 7 for Keep on Own side\n 8 for Closest to Opponent: "))
+                eval_func = int(input("\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - Extra Turn"
+                    +"\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
                 break
             except ValueError:
                 print("Error: Invalid input. Please enter a valid level.")
        
         while eval_func < 1 or eval_func  > 8  :
-            eval_func = int(input("Choose evaluation function:\n 1 for Static, 2 for Simple Score, 3 for Material Advantage, 4 for Extra Turn"
-                         +"\n 5 for Right Side Pit, 6 for Many Moves, 7 for Keep on Own side, 8 for Closest to Opponent: "))
+            eval_func = int(input("\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - Extra Turn"
+                +"\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
 
     if eval_func == 1:
         eval_func = static_eval
