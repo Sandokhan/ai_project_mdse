@@ -1,5 +1,5 @@
 from game import play_game
-from mancala_project.aiEngine import static_eval, simple_score, material_advantage
+from aiEngine import static_eval, simple_score, material_advantage
 from players import Human, Machine
 
 

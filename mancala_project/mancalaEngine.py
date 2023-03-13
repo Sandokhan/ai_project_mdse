@@ -112,6 +112,7 @@ class GameState:
     def make_move(self, move):
         # assumes that the move is valid
         player0_turn = self.player_turn == 0
+        self.capture = False
 
         new_state = deepcopy(self.state)
         hand = new_state[move]
@@ -132,6 +133,7 @@ class GameState:
                     opposite_move = pit_num * 2 - move
                     hand = new_state[move] + new_state[opposite_move]
                     new_state[move], new_state[opposite_move] = 0, 0
+                    self.capture = True
 
                     if player0_turn:
                         new_state[PocketName.p0_mancala] += hand
