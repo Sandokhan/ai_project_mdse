@@ -280,7 +280,7 @@ def minimax(state, depth, evaluation_func=static_eval):
     if depth <= 0 or state.is_terminal():
         return None, evaluation_func(state)
 
-    if state.player_turn == 0:  # maximizer
+    if state.player_turn == 1:  # maximizer
         value = ninf
         best_move = None
 
@@ -291,7 +291,7 @@ def minimax(state, depth, evaluation_func=static_eval):
                 best_move = move
         return best_move, value
 
-    else:  # player 1: minimizer
+    else:  # player 2: minimizer
         value = pinf
         best_move = None
 
@@ -321,7 +321,7 @@ def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf, eval_func=static_eva
     if depth == 0 or state.is_terminal():
         return None, eval_func(state)
 
-    if state.player_turn == 0:  # maximizer
+    if state.player_turn == 1:  # maximizer
         value = ninf
         best_move = None
 
@@ -335,7 +335,7 @@ def minimax_alpha_beta(state, depth, alpha=ninf, beta=pinf, eval_func=static_eva
                 break
         return best_move, value
 
-    else:  # player 1: minimizer
+    else:  # player 2: minimizer
         value = pinf
         best_move = None
 

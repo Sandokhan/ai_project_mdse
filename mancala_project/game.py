@@ -72,6 +72,6 @@ def run_n_matches(n, m1_difficulty, m2_difficulty, m1_eval_func=None, m2_eval_fu
 
 
 if __name__ == "__main__":
-    machine_machine_game(4, machine_level, extra_turn, simple_score)
+    # machine_machine_game(4, machine_level, extra_turn, simple_score)
     # human_machine_game(machine_level)
-    # run_n_matches(10, 2, 3, 8, None)
+    run_n_matches(5, 2, 4, None, extra_turn)
