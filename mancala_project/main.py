@@ -1,5 +1,6 @@
 from game import play_game
-from aiEngine import static_eval, simple_score, material_advantage, extra_turn, rightside_pit,many_moves, keep_on_own_side, closest_to_opponent
+from aiEngine import static_eval, simple_score, material_advantage, extra_turn, rightside_pit, many_moves, \
+    keep_on_own_side, closest_to_opponent
 from players import Human, Machine
 
 
@@ -43,15 +44,19 @@ def main():
     if levelOne or levelTwo:
         while True:
             try:
-                eval_func = int(input("\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - Extra Turn"
-                    +"\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
+                eval_func = int(input(
+                    "\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - "
+                    "Extra Turn"
+                    + "\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
                 break
             except ValueError:
                 print("Error: Invalid input. Please enter a valid level.")
-       
-        while eval_func < 1 or eval_func  > 8  :
-            eval_func = int(input("\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - Extra Turn"
-                +"\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
+
+        while eval_func < 1 or eval_func > 8:
+            eval_func = int(input(
+                "\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - Extra "
+                "Turn"
+                + "\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
 
     if eval_func == 1:
         eval_func = static_eval
@@ -69,7 +74,6 @@ def main():
         eval_func = keep_on_own_side
     else:
         eval_func = closest_to_opponent
-    
 
     players_zero = Human(0) if playerOne != 'm' else Machine(1, levelOne, eval_func=eval_func)
     players_one = Human(1) if playerTwo != 'm' else Machine(0, levelTwo, eval_func=eval_func)

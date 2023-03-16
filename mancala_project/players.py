@@ -1,4 +1,4 @@
-from aiEngine import minimax, minimax_alpha_beta
+from aiEngine import minimax, minimax_alpha_beta, random_move
 from mancalaEngine import PocketName, GameState
 
 
@@ -30,15 +30,17 @@ class Human(Player):
 class Machine(Player):
     def __init__(self, player_id, difficulty, eval_func=None):
         super().__init__(player_id)
-        self.max_depth = 2 * difficulty - 1
+        self.difficulty = difficulty
         self.eval_func = eval_func
 
     def move(self, state):
-        if self.max_depth == 1:
-            move = self.random_move(state)
+        if self.difficulty == 2:
+            move = random_move(state)
             value = None
-        else:
-            move, value = minimax_alpha_beta(state, self.max_depth, eval_func=self.eval_func)
+        elif self.difficulty == 4:
+            move, value = minimax_alpha_beta(state, 4, eval_func=self.eval_func)
+        elif self.difficulty == 6:
+            move, value = minimax_alpha_beta(state, 6, eval_func=self.eval_func)
 
         printed_move = move - PocketName.p0_mancala + 1 if self.player_id == 1 else move
 

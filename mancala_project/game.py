@@ -12,21 +12,21 @@ def humans_game():
     play_game(player_0, player_1)
 
 
-def human_machine_game(ai_difficulty):
+def human_machine_game(ai_difficulty, eval_func=None):
     player_0 = Human(0)
-    player_1 = Machine(1, ai_difficulty)
+    player_1 = Machine(1, ai_difficulty, eval_func)
     play_game(player_0, player_1)
 
 
-def machine_player_game(ai_difficulty):
-    player_0 = Machine(0, ai_difficulty)
+def machine_player_game(ai_difficulty, eval_func=None):
+    player_0 = Machine(0, ai_difficulty, eval_func)
     player_1 = Human(1)
     play_game(player_0, player_1)
 
 
-def machine_machine_game(ai0_difficulty, ai1_difficulty, eval_func):
-    player_0 = Machine(0, ai0_difficulty, eval_func)
-    player_1 = Machine(1, ai1_difficulty, eval_func)
+def machine_machine_game(ai0_difficulty, ai1_difficulty, eval_func_1=None, eval_func_2=None):
+    player_0 = Machine(0, ai0_difficulty, eval_func_1)
+    player_1 = Machine(1, ai1_difficulty, eval_func_2)
     play_game(player_0, player_1)
 
 
@@ -71,6 +71,6 @@ def run_n_matches(n, m1_difficulty, m2_difficulty, m1_eval_func=None, m2_eval_fu
 
 
 if __name__ == "__main__":
-    # machine_machine_game(machine_level, machine_level)
+    machine_machine_game(2, machine_level)
     # human_machine_game(machine_level)
-    run_n_matches(10, 4, 2, 2, None)
+    #run_n_matches(10, 2, 3, 8, None)

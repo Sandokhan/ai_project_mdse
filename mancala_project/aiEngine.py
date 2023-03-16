@@ -244,16 +244,16 @@ def closest_to_opponent(game_state):
     # If no pits in the range have seeds, choose a random pit
     return random.choice([pit_index for pit_index in range(player*aux-PocketName.p0_mancala, player*aux) if game_state[pit_index] > 0])
 
+
 def random_move(state):
     """
     Returns a random move from the current state of the game.
     """
     possible_moves = list(state.possible_moves())
     if len(possible_moves) == 0:
-        return state
+        return None
     move = random.choice(possible_moves)
-    new_state = state.make_move(move)
-    return new_state
+    return move
 
 
 def minimax(state, depth, evaluation_func=static_eval):
