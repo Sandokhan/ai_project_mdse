@@ -40,43 +40,8 @@ def main():
     p_zero = "Human" if playerOne != 'm' else "Machine"
     p_one = "Human" if playerTwo != 'm' else "Machine"
 
-    eval_func = None
-    if levelOne or levelTwo:
-        while True:
-            try:
-                eval_func = int(input(
-                    "\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - "
-                    "Extra Turn"
-                    + "\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
-                break
-            except ValueError:
-                print("Error: Invalid input. Please enter a valid level.")
-
-        while eval_func < 1 or eval_func > 8:
-            eval_func = int(input(
-                "\nChoose evaluation function:\n 1 - Static\n 2 - Simple Score\n 3 - Material Advantage\n 4 - Extra "
-                "Turn"
-                + "\n 5 - Right Side Pit\n 6 - Many Moves\n 7 - Keep on Own side\n 8 - Closest to Opponent: "))
-
-    if eval_func == 1:
-        eval_func = static_eval
-    elif eval_func == 2:
-        eval_func = simple_score
-    elif eval_func == 3:
-        eval_func = material_advantage
-    elif eval_func == 4:
-        eval_func = extra_turn
-    elif eval_func == 5:
-        eval_func = rightside_pit
-    elif eval_func == 6:
-        eval_func = many_moves
-    elif eval_func == 7:
-        eval_func = keep_on_own_side
-    else:
-        eval_func = closest_to_opponent
-
-    players_zero = Human(0) if playerOne != 'm' else Machine(1, levelOne, eval_func=eval_func)
-    players_one = Human(1) if playerTwo != 'm' else Machine(0, levelTwo, eval_func=eval_func)
+    players_zero = Human(0) if playerOne != 'm' else Machine(1, levelOne)
+    players_one = Human(1) if playerTwo != 'm' else Machine(0, levelTwo)
 
     print("\nReady, Players!\n")
     print(f"{p_zero} vs {p_one}")

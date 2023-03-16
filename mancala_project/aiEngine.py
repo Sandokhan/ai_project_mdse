@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from mancalaEngine import PocketName,GameState
+from mancalaEngine import PocketName, GameState
 
 pinf = np.inf
 ninf = - np.inf
@@ -88,20 +88,21 @@ def extra_turn(game_state):
     """
     pit = game_state.move
     player = game_state.current_player_id
-    aux = PocketName.p0_mancala+1
+    aux = PocketName.p0_mancala + 1
 
     # Check if the last seed was sown in an empty pit on the player's side
-    if pit % (aux) == PocketName.p0_mancala or game_state[pit] > 1:
+    if pit % aux == PocketName.p0_mancala or game_state[pit] > 1:
         return 0
 
     # Check if the last seed was sown in a pit with seeds on the player's side
-    opposite_pit = PocketName.p0_mancala *2 - pit
-    if opposite_pit < (player)*(aux) or opposite_pit > (player)*(aux)+PocketName.p0_mancala-1 or game_state[opposite_pit] == 0:
+    opposite_pit = PocketName.p0_mancala * 2 - pit
+    if opposite_pit < player * aux or opposite_pit > player * aux + PocketName.p0_mancala - 1 \
+            or game_state[opposite_pit] == 0:
         return 0
 
     # Calculate the number of seeds to add to the hoarded seeds value
     captured_seeds = game_state[opposite_pit]
-    game_state[player*aux-1] += captured_seeds + 1
+    game_state[player * aux - 1] += captured_seeds + 1
     game_state[opposite_pit] = 0
     game_state[pit] = 0
 
@@ -114,7 +115,7 @@ def extra_turn(game_state):
 
 def rightside_pit(game_state):
     """
-    Hoard as many seeds as possible on the pit in the right side heuristic.
+    Hoard as many seeds as possible in the pit on the right side heuristic.
 
     Args:
     - board: list of integers representing the current board stat
@@ -123,9 +124,9 @@ def rightside_pit(game_state):
     - integer representing the heuristic value of the board for the given player
     """
     player = game_state.current_player_id
-    aux = PocketName.p0_mancala+1
+    aux = PocketName.p0_mancala + 1
     # Find all pits that belong to the player
-    player_pits = [i for i in range((player)*aux, (player)*aux+PocketName.p0_mancala)]
+    player_pits = [i for i in range(player * aux, player * aux + PocketName.p0_mancala)]
 
     # Find the right-most pit with seeds
     hoarding_pit = max(player_pits, key=lambda x: game_state[x])
@@ -138,7 +139,7 @@ def rightside_pit(game_state):
     hoarded_seeds = game_state[hoarding_pit] - (PocketName.p0_mancala - hoarding_pit % aux)
 
     # Check if the hoarding pit leads to a capture or extra turn
-    if (hoarding_pit + hoarded_seeds) % (PocketName.p1_mancala+1) == (player)*aux+PocketName.p0_mancala:
+    if (hoarding_pit + hoarded_seeds) % (PocketName.p1_mancala + 1) == player * aux + PocketName.p0_mancala:
         hoarded_seeds += extra_turn(game_state[:], hoarding_pit + hoarded_seeds, player)
 
     return hoarded_seeds
@@ -192,21 +193,21 @@ def many_moves(game_state):
     # Initialize variables 
     pit = game_state.move
     valid_moves = 0
-    aux = PocketName.p0_mancala+1
+    aux = PocketName.p0_mancala + 1
     player = game_state.current_player_id
     pit = game_state.move
 
     # Iterate over the indices of the pits on the player's side
-    for i in range((player)*aux, (player+1)*aux):
+    for i in range(player * aux, (player + 1) * aux):
         # Check if the pit contains seeds
         if game_state[i] > 0:
             # Check if sowing from this pit would result in a capture
-            if GameState.capture == True:
+            if GameState.capture:
                 valid_moves += 1
             # Otherwise, check if sowing from this pit would result in an extra turn
             elif player == 0 and pit == PocketName.p0_mancala or player == 1 and pit == PocketName.p1_mancala:
                 valid_moves += 1
-            # If neither condition is met, sowing from this pit would not result in a capture or an extra turn
+            # If neither condition is met, sowing from this pit would not result in a capture or an extra turn,
             # so it is a valid move but does not add to the number of valid moves
             else:
                 valid_moves += 1
@@ -217,7 +218,7 @@ def many_moves(game_state):
 
 def closest_to_opponent(game_state):
     """
-    Choose a move based on the pit closest to the opponent's side.
+    Choose a move based in the pit closest to the opponent's side.
 
     Args:
     - board: list of integers representing the current board state
@@ -225,7 +226,7 @@ def closest_to_opponent(game_state):
     Returns:
     - integer representing the index of the pit to sow from
     """
-    aux = PocketName.p0_mancala+1
+    aux = PocketName.p0_mancala + 1
     player = game_state.current_player_id
 
     # Determine the range of pits to consider based on the current player
@@ -242,7 +243,8 @@ def closest_to_opponent(game_state):
             return pit_index
 
     # If no pits in the range have seeds, choose a random pit
-    return random.choice([pit_index for pit_index in range(player*aux-PocketName.p0_mancala, player*aux) if game_state[pit_index] > 0])
+    return random.choice([pit_index for pit_index in range(player * aux - PocketName.p0_mancala, player * aux) if
+                          game_state[pit_index] > 0])
 
 
 def random_move(state):
