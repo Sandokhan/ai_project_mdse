@@ -16,26 +16,26 @@ def choose_eval(level):
         return None
     else:
         print(
-            "Choose an evaluation function:\n0) Static evaluation \n1) Simple Score\n2) Material Advantage\n3) Extra "
-            "Turn\n4) Rightside Pit\n5) Many Moves\n6) Keep on Own Side\n7) Closest to Opponent")
+            "Choose an evaluation function:\n1) Game and evaluation \n2) Game Position\n3) Number of seeds\n4) Extra "
+            "Turn\n5) Rightside Pit\n6) Many Moves\n7) Keep on Own Side\n8) Closest to Opponent")
         while True:
             try:
-                eval_choice = int(input("Enter a number between 0 and 7: "))
-                if eval_choice == 0:
-                    return static_eval
+                eval_choice = int(input("Enter a number between 1 and 8: "))
                 if eval_choice == 1:
+                    return static_eval
+                if eval_choice == 2:
                     return simple_score
-                elif eval_choice == 2:
-                    return material_advantage
                 elif eval_choice == 3:
-                    return extra_turn
+                    return material_advantage
                 elif eval_choice == 4:
-                    return rightside_pit
+                    return extra_turn
                 elif eval_choice == 5:
-                    return many_moves
+                    return rightside_pit
                 elif eval_choice == 6:
-                    return keep_on_own_side
+                    return many_moves
                 elif eval_choice == 7:
+                    return keep_on_own_side
+                elif eval_choice == 8:
                     return closest_to_opponent
                 else:
                     print("Invalid input.")
@@ -54,8 +54,11 @@ def main():
     if playerOne == 'm':
         while True:
             try:
-                levelOne = int(input("Machine level (2 for easy, 4 for medium, and 6 for hard): "))
-                break
+                levelOne = int(input("Machine level (2 for easy, 4 for medium, 6 for hard, and 8 for expert): "))
+                if levelOne in [2, 4, 6, 8]:
+                    break
+                else:
+                    print("Error: Invalid input.Please enter a valid level.")
             except ValueError:
                 print("Error: Invalid input. Please enter a valid level.")
 
@@ -67,8 +70,11 @@ def main():
     if playerTwo == 'm':
         while True:
             try:
-                levelTwo = int(input("Machine level (2 for easy, 4 for medium, and 6 for hard): "))
-                break
+                levelTwo = int(input("Machine level (2 for easy, 4 for medium, 6 for hard, and 8 for expert): "))
+                if levelTwo in [2, 4, 6, 8]:
+                    break
+                else:
+                    print("Error: Invalid input.Please enter a valid level.")
             except ValueError:
                 print("Error: Invalid input. Please enter a valid level.")
 

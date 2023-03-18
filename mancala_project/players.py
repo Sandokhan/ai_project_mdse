@@ -37,10 +37,8 @@ class Machine(Player):
         if self.difficulty == 2:
             move = random_move(state)
             value = None
-        elif self.difficulty == 4:
-            move, value = minimax_alpha_beta(state, 4, eval_func=self.eval_func)
-        elif self.difficulty == 6:
-            move, value = minimax_alpha_beta(state, 6, eval_func=self.eval_func)
+        else:
+            move, value = minimax_alpha_beta(state, self.difficulty, eval_func=self.eval_func)
 
         printed_move = move - PocketName.p0_mancala + 1 if self.player_id == 1 else move
 
@@ -49,4 +47,3 @@ class Machine(Player):
 
         new_state = state.make_move(move)
         return new_state
-
