@@ -53,21 +53,13 @@ To start a game between a human player and a machine player with difficulty leve
 eval_function, run the following code:
 
 ```python
-from aiEngine import Machine, material_advantage
-from gameEngine import GameState, Human
+from mancala import human_machine_game, machine_level
 
-state = GameState()
-p1 = Human(1)
-p2 = Machine(0, 2, 3)
-players = [p1, p2]
+# Play against the machine at level 6 (hard difficulty) 
+# with extra_turn evaluation function
 
-while not state.is_terminal():
-    state.show()
-    player = players[state.player_turn]
-    state = player.move(state)
+human_machine_game(machine_level, extra_turn)
 
-state.show()
-state.show_winning_message()
 ```
 
 This will start the game and allow the human player to enter moves through the console, while the machine player uses
