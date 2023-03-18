@@ -74,4 +74,6 @@ def run_n_matches(n, m1_difficulty, m2_difficulty, m1_eval_func=None, m2_eval_fu
 if __name__ == "__main__":
     # machine_machine_game(4, machine_level, extra_turn, simple_score)
     # human_machine_game(machine_level)
+    # static_eval, simple_score, material_advantage, extra_turn, rightside_pit, many_moves,
+    # keep_on_own_side, closest_to_opponent
     run_n_matches(5, 2, 4, None, extra_turn)
